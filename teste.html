@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressão Inteligente - Soluções Gráficas em Pernambuco</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #232122;
+            --secondary: #fef014;
+            --tertiary: #28b2fc;
+            --accent: #e90f8b;
+            --bg: #fdfdfd;
+            --text: #232122;
+            --text-light: #6b6b6b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(rgba(253, 253, 253, 0.9), rgba(253, 253, 253, 0.9)), 
+                        url('https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1468&q=80') no-repeat center center/cover;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--text-light);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--tertiary);
+        }
+
+        .benefit-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+            background-color: var(--bg);
+        }
+
+        .products-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-icon {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--tertiary), var(--accent));
+            color: white;
+            font-size: 40px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 0 15px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 0 auto 20px;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            right: -50px;
+            width: 100px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: var(--secondary);
+        }
+
+        .footer-contact h3, .footer-links h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            margin-right: 10px;
+            color: var(--tertiary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--tertiary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .step:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+            }
+            
+            .step {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="WhatsApp_Image_2025-04-16_at_19.17.41-removebg-preview.png" style="width: 95px;">
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#products">Produtos</a></li>
+                    <li><a href="#benefits">Vantagens</a></li>
+                    <li><a href="#process">Como Funciona</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/SEUNUMERO" class="btn btn-primary" target="_blank">Orçamento</a>
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Soluções Gráficas Inteligentes para seu Negócio</h2>
+            <p>Orçamento rápido via WhatsApp - Atendimento personalizado em todo Pernambuco com qualidade e agilidade que sua empresa merece.</p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/SEUNUMERO" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Fale conosco agora</a>
+                <a href="#products" class="btn btn-primary">Nossos Produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por que escolher a Impressão Inteligente?</h2>
+                <p>Oferecemos as melhores soluções gráficas com qualidade, rapidez e preços competitivos</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Preços Competitivos</h3>
+                    <p>Orçamentos personalizados de acordo com suas necessidades e orçamento.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Produção Rápida</h3>
+                    <p>Entregamos seu material no prazo combinado, sem comprometer a qualidade.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Atendimento Personalizado</h3>
+                    <p>Especialistas prontos para te ajudar a escolher a melhor solução para seu projeto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Produtos</h2>
+                <p>Conheça nossa variedade de produtos gráficos de alta qualidade</p>
+            </div>
+            <div class="products-filter">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="papelaria">Papelaria</button>
+                <button class="filter-btn" data-filter="grandes">Grandes Formatos</button>
+                <button class="filter-btn" data-filter="promocional">Promocional</button>
+                <button class="filter-btn" data-filter="especial">Especializados</button>
+            </div>
+            <div class="products-grid">
+                <!-- Papelaria -->
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cartão de Visita</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Cartão%20de%20Visita" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cartão de Visita Premium</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Cartão%20de%20Visita%20Premium" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Tags</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Tags" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Panfleto</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Panfleto" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-folders"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Folder</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Folder" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-paste"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cartaz</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Cartaz" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-magnet"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Imã de Geladeira</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Imã%20de%20Geladeira" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Pasta com Orelha</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Pasta%20com%20Orelha" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Pasta com Bolso</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Pasta%20com%20Bolso" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cardápios A4/A3</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Cardápios" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Talão Autocopiativo</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Talão%20Autocopiativo" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="papelaria">
+                    <div class="product-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Receituário</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Receituário" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                
+                <!-- Grandes Formatos -->
+                <div class="product-card" data-category="grandes">
+                    <div class="product-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Bigflag (Vários Formatos)</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Bigflag" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="grandes">
+                    <div class="product-icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Adesivos Grandes Formatos</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Adesivos%20Grandes%20Formatos" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="grandes">
+                    <div class="product-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Lonas Grandes Formatos</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Lonas%20Grandes%20Formatos" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="grandes">
+                    <div class="product-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Roll-Up</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Roll-Up" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                
+                <!-- Promocional -->
+                <div class="product-card" data-category="promocional">
+                    <div class="product-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Chaveiros</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Chaveiros" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="promocional">
+                    <div class="product-icon">
+                        <i class="fas fa-pen"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Canetas</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Canetas" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="promocional">
+                    <div class="product-icon">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Copos</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Copos" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                
+                <!-- Especializados -->
+                <div class="product-card" data-category="especial">
+                    <div class="product-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Etiqueta Lacre</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Etiqueta%20Lacre" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+                <div class="product-card" data-category="especial">
+                    <div class="product-icon">
+                        <i class="fas fa-stamp"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Adesivo Selo</h3>
+                        <a href="https://wa.me/SEUNUMERO?text=Gostaria%20de%20um%20orçamento%20para%20Adesivo%20Selo" class="btn btn-primary" target="_blank">Orçar via WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Como Funciona</h2>
+                <p>Um processo simples e eficiente para atender suas necessidades gráficas</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Você nos envia sua arte</h3>
+                    <p>Envie seu arquivo pronto ou converse com nosso time sobre seu projeto.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Nós fazemos o orçamento</h3>
+                    <p>Analisamos seu projeto e enviamos o orçamento em até 24h.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Aprovação e produção</h3>
+                    <p>Após sua aprovação, iniciamos a produção com qualidade garantida.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Entrega rápida</h3>
+                    <p>Entregamos seu material no prazo combinado em todo Pernambuco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/SEUNUMERO" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">IMPRESSÃO <span>INTELIGENTE</span></div>
+                    <p>Soluções gráficas inteligentes para seu negócio com qualidade, agilidade e preços competitivos.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contato</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <a href="https://wa.me/SEUNUMERO" target="_blank">WhatsApp</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:contato@impressaointeligente.com.br">contato@impressaointeligente.com.br</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>Atendemos todo Pernambuco</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#products">Produtos</a></li>
+                        <li><a href="#benefits">Vantagens</a></li>
+                        <li><a href="#process">Como Funciona</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Impressão Inteligente. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenu.innerHTML = mainNav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if(this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if(mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenu.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Product Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                productCards.forEach(card => {
+                    if(filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // WhatsApp number replacement (replace SEUNUMERO with actual number)
+        function replaceWhatsappNumber() {
+            const whatsappNumber = '5581999999999'; // Example: 5581999999999 (55=BR, 81=PE, 9...)
+            const whatsappLinks = document.querySelectorAll('a[href*="SEUNUMERO"]');
+            
+            whatsappLinks.forEach(link => {
+                link.href = link.href.replace('SEUNUMERO', whatsappNumber);
+            });
+        }
+        
+        // Call the function when page loads
+        window.addEventListener('DOMContentLoaded', replaceWhatsappNumber);
+    </script>
+</body>
+</html>
